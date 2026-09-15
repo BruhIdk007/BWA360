@@ -1,0 +1,21 @@
+--- /opt/openxechain/synthxex/m1-backup-20260915-230004/datastorage.h	2026-09-15 23:00:04.929415863 +0300
++++ /opt/openxechain/synthxex/src/common/datastorage.h	2026-09-15 23:00:04.956333452 +0300
+@@ -94,6 +94,18 @@
+ struct peImport
+ {
+     uint32_t iatAddr;
++
++    /*
++     * Xbox 360 function imports require two XEX import records:
++     *
++     *   type 0 -> IAT entry
++     *   type 1 -> executable import thunk
++     *
++     * thunkAddr is zero for imports where no compatible function
++     * thunk was found.
++     */
++    uint32_t thunkAddr;
++    uint16_t ordinal;
+ };
+ 
+ struct peImportTable

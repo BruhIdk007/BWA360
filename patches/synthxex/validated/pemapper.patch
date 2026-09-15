@@ -1,0 +1,247 @@
+--- /opt/openxechain/synthxex/m1-backup-20260915-230004/pemapper.c	2026-09-15 23:00:04.930725964 +0300
++++ /opt/openxechain/synthxex/src/pemapper/pemapper.c	2026-09-15 23:09:41.156807076 +0300
+@@ -28,6 +28,215 @@
+ 
+ // Strips the ordinal flags from IAT entries, and swaps them to big endian
+ // Also adds module indexes to them
++
++/*
++ * OpenXeChain / LLD PowerPC function import thunk finder.
++ *
++ * Current LLD emits:
++ *
++ *   lis   r11, IAT@ha
++ *   lwz   r11, IAT@l(r11)
++ *   mtctr r11
++ *   bctr
++ *
++ * XEX function imports need a type-1 import record located at this
++ * executable stub, in addition to the type-0 IAT record.
++ *
++ * This is intentionally a targeted OpenXeChain bring-up implementation.
++ * It should eventually be replaced with authoritative function/data
++ * import metadata propagated by the linker/toolchain.
++ */
++static uint32_t findImportThunk(FILE *basefile,
++                                struct peData *peData,
++                                uint32_t iatAddr)
++{
++    /*
++     * LLD/OpenXeChain import stub:
++     *
++     *   lis   r11, IAT@ha
++     *   lwz   r11, IAT@l(r11)
++     *   mtctr r11
++     *   bctr
++     *
++     * For M1 bring-up, scan the complete mapped image rather than
++     * depending on section permission metadata.
++     *
++     * The full 16-byte pattern includes the concrete IAT address,
++     * making accidental matches extremely unlikely.
++     */
++
++    if(peData->size < 16)
++    {
++        return 0;
++    }
++
++    uint16_t hi =
++        (uint16_t)(((iatAddr + 0x8000) >> 16) & 0xFFFF);
++
++    uint16_t lo =
++        (uint16_t)(iatAddr & 0xFFFF);
++
++    uint8_t pattern[16] =
++    {
++        /* lis r11, IAT@ha */
++        0x3D, 0x60,
++        (uint8_t)(hi >> 8),
++        (uint8_t)(hi & 0xFF),
++
++        /* lwz r11, IAT@l(r11) */
++        0x81, 0x6B,
++        (uint8_t)(lo >> 8),
++        (uint8_t)(lo & 0xFF),
++
++        /* mtctr r11 */
++        0x7D, 0x69, 0x03, 0xA6,
++
++        /* bctr */
++        0x4E, 0x80, 0x04, 0x20
++    };
++
++    uint8_t *buffer = malloc(peData->size);
++
++    if(!buffer)
++    {
++        return 0;
++    }
++
++    if(fseek(basefile, 0, SEEK_SET) != 0)
++    {
++        nullAndFree((void **)&buffer);
++        return 0;
++    }
++
++    size_t got =
++        fread(buffer,
++              1,
++              peData->size,
++              basefile);
++
++    if(got != peData->size)
++    {
++        fprintf(stderr,
++                "SynthXEX> M1 thunk scan: "
++                "short read (%zu / %u)\n",
++                got,
++                peData->size);
++
++        nullAndFree((void **)&buffer);
++        return 0;
++    }
++
++    for(uint32_t off = 0;
++        off + sizeof(pattern) <= peData->size;
++        off += 4)
++    {
++        if(memcmp(buffer + off,
++                  pattern,
++                  sizeof(pattern)) == 0)
++        {
++            uint32_t thunk =
++                peData->baseAddr + off;
++
++            fprintf(stderr,
++                    "SynthXEX> M1 thunk found: "
++                    "IAT=0x%08X "
++                    "THUNK=0x%08X "
++                    "RVA=0x%08X\n",
++                    iatAddr,
++                    thunk,
++                    off);
++
++            nullAndFree((void **)&buffer);
++
++            return thunk;
++        }
++    }
++
++    fprintf(stderr,
++            "SynthXEX> M1 thunk NOT found: "
++            "IAT=0x%08X "
++            "image-size=0x%08X\n",
++            iatAddr,
++            peData->size);
++
++    nullAndFree((void **)&buffer);
++
++    return 0;
++}
++
++
++/*
++ * Replace the first instruction of an import thunk with the XEX
++ * type-1 import descriptor.
++ *
++ * The Xbox loader replaces this descriptor with the appropriate
++ * kernel-call thunk while resolving imports.
++ */
++static int xenonifyImportThunks(FILE *basefile,
++                                struct peData *peData)
++{
++    for(uint32_t i = 0;
++        i < peData->peImportInfo.tableCount;
++        i++)
++    {
++        struct peImportTable *table =
++            &peData->peImportInfo.tables[i];
++
++        for(uint32_t j = 0;
++            j < table->importCount;
++            j++)
++        {
++            struct peImport *imp = &table->imports[j];
++
++            imp->thunkAddr =
++                findImportThunk(basefile,
++                                peData,
++                                imp->iatAddr);
++
++            if(imp->thunkAddr == 0)
++            {
++                continue;
++            }
++
++            uint32_t descriptor =
++                0x01000000 |
++                ((i & 0xFF) << 16) |
++                imp->ordinal;
++
++            uint32_t thunkRVA =
++                imp->thunkAddr - peData->baseAddr;
++
++            if(fseek(basefile,
++                     thunkRVA,
++                     SEEK_SET) != 0)
++            {
++                return ERR_FILE_WRITE;
++            }
++
++#ifdef LITTLE_ENDIAN_SYSTEM
++            descriptor = __builtin_bswap32(descriptor);
++#endif
++
++            if(fwrite(&descriptor,
++                      sizeof(uint32_t),
++                      1,
++                      basefile) < 1)
++            {
++                return ERR_FILE_WRITE;
++            }
++
++            /*
++             * Required between read/write operations on an update
++             * stream by the C standard.
++             */
++            fseek(basefile, 0, SEEK_CUR);
++        }
++    }
++
++    return SUCCESS;
++}
++
++
+ int xenonifyIAT(FILE *basefile, struct peData *peData)
+ {
+     // Loop through each import table and handle their IAT entries
+@@ -73,7 +282,14 @@
+                 iatEntry &= ~PE_IMPORT_ORDINAL_FLAG; // Strip the import by ordinal flag
+             }
+ 
+-            iatEntry |= (i & 0x000000FF) << 16; // Add the module index
++            /*
++         * Save the ordinal before module/type fields are packed into
++         * the Xbox import descriptor.
++         */
++        peData->peImportInfo.tables[i].imports[j].ordinal =
++            (uint16_t)(iatEntry & 0xFFFF);
++
++        iatEntry |= (i & 0x000000FF) << 16; // Add the module index
+ 
+             // Write back out as big endian (TODO: make a utility function for this like get32BitFromPE)
+ #ifdef LITTLE_ENDIAN_SYSTEM
+@@ -89,7 +305,11 @@
+         }
+     }
+ 
+-    return SUCCESS;
++    /*
++     * IAT descriptors are now valid. Locate any generated function
++     * import stubs and convert them to XEX type-1 records as well.
++     */
++    return xenonifyImportThunks(basefile, peData);
+ }
+ 
+ // Maps the PE file into the basefile (RVAs become offsets)

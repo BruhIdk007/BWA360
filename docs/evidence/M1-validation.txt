@@ -1,0 +1,52 @@
+BWA360 / LexEngine — M1 validation evidence
+Date: 2026-09-15
+
+TOOLCHAIN
+---------
+clang version 20.1.5
+Target: ppc32-unknown-xbox360
+SynthXEX v0.0.5
+
+PE
+--
+Machine: 0x1F2
+AddressSize: 32bit
+Characteristics:
+  IMAGE_FILE_32BIT_MACHINE
+  IMAGE_FILE_EXECUTABLE_IMAGE
+  IMAGE_FILE_RELOCS_STRIPPED
+Magic: 0x10B
+AddressOfEntryPoint: 0x10000
+ImageBase: 0x82000000
+Subsystem: IMAGE_SUBSYSTEM_XBOX (0xE)
+
+IMPORT
+------
+Name: xboxkrnl.exe@21256.0+1861.0
+Symbol: DbgPrint (3)
+IAT: 0x8202006C
+Function thunk: 0x82010054
+
+CORRECTED XEX IMPORT LIBRARY
+----------------------------
+Library #0: xboxkrnl.exe
+imports: 2
+[0] address=0x8202006C rva=0x2006C value=0x00000003 type=0 ordinal=3
+[1] address=0x82010054 rva=0x10054 value=0x01000003 type=1 ordinal=3
+
+RUNTIME
+-------
+Xenia loaded GAME:\default.xex
+KernelState: Launching module...
+Main XThread launched
+DbgPrint implemented: 100%
+
+SUCCESS MARKER
+--------------
+i> F8000008 (DbgPrint) HELLO360: LexEngine bring-up successful!
+
+REFERENCE SUCCESSFUL XEX SHA-256
+--------------------------------
+bfc4403684adbf01d9864bc1cb134a7f016e4e292d3e46f5ff7a01c729672da0
+
+Note: this hash is evidence from one successful build. Build timestamps may change XEX hashes.

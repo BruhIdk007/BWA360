@@ -1,0 +1,64 @@
+# Build products
+build/
+build-*/
+out/
+bin/
+obj/
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.dll
+*.exe
+*.xex
+*.basefile
+*.pdb
+
+# M1 generated diagnostics
+**/diagnostics/
+**/diagnostics-*/
+*.log
+pe-inspect.txt
+synthxex-help.txt
+
+# Local toolchains / emulator builds
+.tools/
+tools/vendor/
+third_party/local/
+
+# Proprietary / user-supplied game material
+original/
+originals/
+assets/original/
+private-assets/
+main.pak
+*.pak
+*.exe.orig
+
+# Reverse-engineering databases and local captures
+*.bndb
+*.i64
+*.id0
+*.id1
+*.id2
+*.nam
+*.til
+*.ghidra
+captures/
+dumps/
+traces/
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*~
+*.swp
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/

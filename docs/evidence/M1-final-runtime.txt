@@ -1,0 +1,17 @@
+BWA360 / LexEngine — M1 final runtime evidence
+Date: 2026-09-15
+
+Validated XEX import pair:
+  xboxkrnl.exe / DbgPrint / ordinal 3
+  type 0: 0x8202006C
+  type 1: 0x82010054
+
+Observed Xenia guest log:
+  i> F8000008 (DbgPrint) HELLO360: LexEngine bring-up successful!
+
+Conclusion:
+  Native PowerPC guest code produced by OpenXeChain was packaged as XEX2,
+  loaded by Xenia, resolved through xboxkrnl!DbgPrint, and executed.
+
+M1: COMPLETE
+M2: ACTIVE
