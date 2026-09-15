@@ -55,3 +55,34 @@ Gameplay state should be reproducible from state + input + RNG state. This suppo
 - Generation handles for new engine resources.
 - Ring buffers for replay/rewind snapshots.
 - Data-oriented storage for particles/render batches; recovered OOP where fidelity benefits.
+
+## Future modding / challenge abstraction
+
+The public LexMod layer is a late-roadmap concern (M39/M42), but the engine should avoid unnecessary assumptions that all future gameplay content is letter-based. Classic BWA itself remains strictly word-based.
+
+The intended high-level separation is:
+
+```text
+challenge provider
+    ├── Classic WordRuleProvider
+    └── LexMath ArithmeticRuleProvider
+                 ↓
+          ChallengeResult
+                 ↓
+   combat / scoring / progression / presentation
+```
+
+A future `ChallengeResult`-style contract may carry correctness, score/value, damage/effect inputs and feedback metadata. The exact ABI/API must be designed from real reconstructed BWA requirements first; this diagram is an architectural constraint, not an instruction to over-generalize M2.
+
+LexMath will validate the public SDK with examples such as:
+
+```text
+7 + 5 = ?       → 12
+15 - 7 = ?      → 8
+6 × 3 = ?       → 18
+24 ÷ 6 = ?      → 4
+? + 5 = 13      → 8
+17 ? 12         → >
+```
+
+The reference mod should load externally and use documented APIs only.

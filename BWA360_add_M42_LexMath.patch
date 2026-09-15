@@ -1,0 +1,350 @@
+diff --git a/CHANGELOG.md b/CHANGELOG.md
+index 0e8bdf6..c6a3548 100644
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@ -2,6 +2,14 @@
+ 
+ All notable project-level milestones are recorded here.
+ 
++## [Unreleased]
++
++### Planned
++
++- Renamed M39 to **LexMod SDK Foundation** and clarified support for public gameplay/content extension points.
++- Added **M42 — LexMod SDK Showcase: LexMath**, an educational arithmetic conversion used as the final integration test and reference project for the public modding API.
++- Added a long-term architecture requirement that engine extension boundaries remain content-agnostic while Classic BWA remains strictly word-faithful.
++
+ ## [0.0.1] — Toolchain Bring-up — 2026-09-15
+ 
+ ### Added
+diff --git a/README.md b/README.md
+index 825e972..1b980d8 100644
+--- a/README.md
++++ b/README.md
+@@ -7,7 +7,7 @@ The project has two strict layers:
+ - **Classic Mode** — reconstruct original Bookworm Adventures behavior, balance, data flow and presentation as faithfully as practical.
+ - **Enhanced / Collection layers** — optional modern systems built on top of the reconstructed game without silently changing Classic gameplay.
+ 
+-The long-term collection plan includes native LexEngine modules for **Bookworm Adventures Volume 2** and **Bookworm Deluxe**.
++The long-term collection plan includes native LexEngine modules for **Bookworm Adventures Volume 2** and **Bookworm Deluxe**. A later **LexMod SDK** will expose supported extension points for external mods; its reference showcase, **LexMath**, will replace word challenges with child-friendly arithmetic questions while reusing the same engine/combat pipeline.
+ 
+ > **Current state:** M1 — Hello360 is complete. Native PowerPC guest code produced with OpenXeChain has been packaged as XEX2, loaded by Xenia, and has successfully called `xboxkrnl!DbgPrint`.
+ 
+@@ -112,6 +112,26 @@ BWA360/
+ 
+ Generated `.obj`, `.exe`, `.xex`, `.basefile`, logs, diagnostics and proprietary game data are intentionally ignored.
+ 
++## Long-term modding direction
++
++The roadmap separates modding into two milestones:
++
++- **M39 — LexMod SDK Foundation:** manifests, packaging, safe loading, versioned APIs and gameplay/content extension points.
++- **M42 — LexMod SDK Showcase: LexMath:** a complete educational arithmetic conversion built through the public SDK.
++
++LexMath is intentionally more than a cosmetic content pack. It is the architecture test that LexEngine can support a different challenge domain without hard-coding a second game into the engine. Classic Bookworm gameplay remains word-based and unchanged.
++
++Conceptually:
++
++```text
++Classic BWA  → Word rule provider       → ChallengeResult
++LexMath      → Arithmetic rule provider → ChallengeResult
++                                           ↓
++                               combat / progression / VFX
++```
++
++The exact API will be designed later; M2 must remain a small platform bring-up and should not prematurely implement the modding layer.
++
+ ## Legal / preservation boundary
+ 
+ This project is independent and is not affiliated with or endorsed by PopCap Games, Electronic Arts, Microsoft or the Xenia/OpenXeChain projects.
+diff --git a/RELEASES.md b/RELEASES.md
+index da1dd86..c049cc2 100644
+--- a/RELEASES.md
++++ b/RELEASES.md
+@@ -74,9 +74,15 @@ This file tracks release checkpoints. A release is checked only when its require
+ 
+ - [ ] **v3.0.0 — Ultimate Collection**
+   - Requires: M37–M41
+-  - Hardened parsers, developer tooling, modding SDK, final optimization/documentation and optional proven Kinect extras.
++  - Hardened parsers, developer tooling, LexMod SDK foundation, final optimization/documentation and optional proven Kinect extras.
+   - Tag: `v3.0.0`
+ 
++- [ ] **v3.1.0 — LexMath SDK Showcase**
++  - Requires: M42 (and the M39 LexMod SDK foundation)
++  - Reference educational arithmetic conversion distributed as the canonical LexMod example/template.
++  - Demonstrates custom gameplay-rule providers without engine-source modification.
++  - Tag: `v3.1.0`
++
+ ---
+ 
+ ## Planning range
+diff --git a/REPO_FILELIST.txt b/REPO_FILELIST.txt
+index 6b92377..70bc3e0 100644
+--- a/REPO_FILELIST.txt
++++ b/REPO_FILELIST.txt
+@@ -1,37 +1,38 @@
+-./.github/ISSUE_TEMPLATE/bug_report.md
+-./.github/ISSUE_TEMPLATE/reverse_engineering_finding.md
+-./.github/pull_request_template.md
+-./.gitignore
+-./BOOTSTRAP_GIT.md
+-./CHANGELOG.md
+-./CONTRIBUTING.md
+-./NO-LICENSE-YET.md
+-./README.md
+-./RELEASES.md
+-./REPO_FILELIST.txt
+-./ROADMAP.md
+-./SECURITY.md
+-./STATUS.md
+-./docs/architecture/PROJECT-ARCHITECTURE.md
+-./docs/evidence/M1-final-runtime.txt
+-./docs/evidence/M1-probe-matrix.md
+-./docs/evidence/M1-validation.txt
+-./docs/milestones/M1-Hello360.md
+-./docs/milestones/M2-LexEngine-Platform-Bringup.md
+-./docs/repository/FRESH-REPOSITORY-RESET.md
+-./docs/repository/GITHUB_METADATA.md
+-./docs/repository/LICENSING.md
+-./docs/repository/RELEASE_CHECKLIST.md
+-./docs/toolchain/M1-Debugging-Timeline.md
+-./docs/toolchain/M1-OpenXeChain-Xenia-Bringup.md
+-./patches/synthxex/GENERATE_PATCH_ON_VALIDATION_HOST.md
+-./patches/synthxex/README.md
+-./patches/synthxex/apply-m1-function-thunk-fix.sh
+-./tests/hello360/build.sh
+-./tests/hello360/hello360.c
+-./tests/hello360/run-xenia.sh
+-./tools/m1/README.md
+-./tools/m1/diagnose-m1-import.sh
+-./tools/m1/diagnose-m1-jit.sh
+-./tools/m1/inspect-import-layout.sh
+-./tools/m1/verify-m1.sh
++.github/ISSUE_TEMPLATE/bug_report.md
++.github/ISSUE_TEMPLATE/reverse_engineering_finding.md
++.github/pull_request_template.md
++.gitignore
++BOOTSTRAP_GIT.md
++CHANGELOG.md
++CONTRIBUTING.md
++NO-LICENSE-YET.md
++README.md
++RELEASES.md
++REPO_FILELIST.txt
++ROADMAP.md
++SECURITY.md
++STATUS.md
++docs/architecture/PROJECT-ARCHITECTURE.md
++docs/evidence/M1-final-runtime.txt
++docs/evidence/M1-probe-matrix.md
++docs/evidence/M1-validation.txt
++docs/milestones/M1-Hello360.md
++docs/milestones/M2-LexEngine-Platform-Bringup.md
++docs/milestones/M42-LexMod-SDK-LexMath.md
++docs/repository/FRESH-REPOSITORY-RESET.md
++docs/repository/GITHUB_METADATA.md
++docs/repository/LICENSING.md
++docs/repository/RELEASE_CHECKLIST.md
++docs/toolchain/M1-Debugging-Timeline.md
++docs/toolchain/M1-OpenXeChain-Xenia-Bringup.md
++patches/synthxex/GENERATE_PATCH_ON_VALIDATION_HOST.md
++patches/synthxex/README.md
++patches/synthxex/apply-m1-function-thunk-fix.sh
++tests/hello360/build.sh
++tests/hello360/hello360.c
++tests/hello360/run-xenia.sh
++tools/m1/README.md
++tools/m1/diagnose-m1-import.sh
++tools/m1/diagnose-m1-jit.sh
++tools/m1/inspect-import-layout.sh
++tools/m1/verify-m1.sh
+diff --git a/ROADMAP.md b/ROADMAP.md
+index dd82008..ab23c12 100644
+--- a/ROADMAP.md
++++ b/ROADMAP.md
+@@ -251,10 +251,11 @@ This file is the canonical high-level roadmap for the project.
+   - `bwa-pak`, resource inspector, replay viewer, state diff, symbol DB, function matcher, achievement generator, content validator/packager and RE scripts.
+   - **DoD:** clean host setup can reproduce the documented analysis/build pipeline.
+ 
+-- [ ] **M39 — Modding SDK**
+-  - Data-driven custom books, enemies, treasures, dictionaries, arenas and scripts.
+-  - Safe mod loading and versioned API.
+-  - **DoD:** an external sample mod can be built and loaded without changing engine source.
++- [ ] **M39 — LexMod SDK Foundation**
++  - Data-driven custom books, enemies, treasures, dictionaries, arenas, scripts and gameplay rule providers.
++  - Safe mod discovery/loading, manifests, packaging and a versioned public API.
++  - Extension points must allow custom challenge/content logic without requiring engine-source changes.
++  - **DoD:** an external sample mod can be built, packaged and loaded without changing engine source.
+ 
+ - [ ] **M40 — Kinect Research Branch**
+   - Optional/post-release only.
+@@ -266,6 +267,16 @@ This file is the canonical high-level roadmap for the project.
+   - Cross-module polish, profiling, adaptive quality, frame pacing, benchmark mode/boss, crash diagnostics, documentation and final real-hardware soak testing.
+   - **DoD:** production-quality collection release meeting final performance/stability/preservation criteria.
+ 
++- [ ] **M42 — LexMod SDK Showcase: LexMath**
++  - Build a complete educational arithmetic conversion primarily through the public LexMod SDK, not by hard-coding a special mode into LexEngine.
++  - Replace word-building challenges with number/operator challenges in which the player selects the correct result of an arithmetic expression.
++  - Initial exercise families: addition, subtraction, multiplication, division, missing-number equations and comparisons (`<`, `>`, `=`).
++  - Support age/difficulty profiles, timed and untimed play, configurable distractors, educational feedback and progression.
++  - Reuse the normal combat/progression/presentation pipeline through a generic challenge-result contract so the engine does not need to know whether a correct answer came from a word or a calculation.
++  - Example: `7 + 5 = ?` with `[10] [12] [14] [15]`; selecting `12` produces a successful challenge result.
++  - Ship the mod as the reference/template project for third-party LexMod development.
++  - **DoD:** LexMath builds and loads as an external mod, completes a representative campaign/battle loop on host targets and Xbox 360, and requires no private engine hooks beyond the documented LexMod API.
++
+ ---
+ 
+ # Global Engineering Principles
+@@ -280,3 +291,4 @@ This file is the canonical high-level roadmap for the project.
+ 8. **Performance target before spectacle.** A feature that destroys frame pacing does not ship on real Xbox 360.
+ 9. **Real hardware is authoritative.** Xenia is the rapid iteration environment, not the final performance oracle.
+ 10. **No proprietary assets in Git.** Users import from their own legally obtained copies.
++11. **Extension boundaries stay content-agnostic.** LexEngine itself should not assume that every challenge is a word; future rule providers may supply letters, numbers, operators or other content while Classic BWA remains word-faithful.
+diff --git a/STATUS.md b/STATUS.md
+index 6b282f1..673f7fc 100644
+--- a/STATUS.md
++++ b/STATUS.md
+@@ -36,6 +36,12 @@
+ 7. Play one simple sound.
+ 8. Validate on Xenia first, then on real modified Xbox 360 hardware when available.
+ 
++## Long-term roadmap addition
++
++- [ ] **M39 — LexMod SDK Foundation** will provide the supported external mod API.
++- [ ] **M42 — LexMod SDK Showcase: LexMath** will validate that API with a child-friendly arithmetic conversion.
++- This does **not** expand M2 scope; M2 remains platform bring-up only.
++
+ ## Known environment issue
+ 
+ The current Linux Xenia setup detects only Mesa `llvmpipe` rather than a physical Vulkan GPU. This did not block M1 because M1 required no rendering, but hardware Vulkan must be fixed before graphics/performance work becomes authoritative.
+diff --git a/docs/architecture/PROJECT-ARCHITECTURE.md b/docs/architecture/PROJECT-ARCHITECTURE.md
+index 40869cc..906ca39 100644
+--- a/docs/architecture/PROJECT-ARCHITECTURE.md
++++ b/docs/architecture/PROJECT-ARCHITECTURE.md
+@@ -55,3 +55,34 @@ Gameplay state should be reproducible from state + input + RNG state. This suppo
+ - Generation handles for new engine resources.
+ - Ring buffers for replay/rewind snapshots.
+ - Data-oriented storage for particles/render batches; recovered OOP where fidelity benefits.
++
++## Future modding / challenge abstraction
++
++The public LexMod layer is a late-roadmap concern (M39/M42), but the engine should avoid unnecessary assumptions that all future gameplay content is letter-based. Classic BWA itself remains strictly word-based.
++
++The intended high-level separation is:
++
++```text
++challenge provider
++    ├── Classic WordRuleProvider
++    └── LexMath ArithmeticRuleProvider
++                 ↓
++          ChallengeResult
++                 ↓
++   combat / scoring / progression / presentation
++```
++
++A future `ChallengeResult`-style contract may carry correctness, score/value, damage/effect inputs and feedback metadata. The exact ABI/API must be designed from real reconstructed BWA requirements first; this diagram is an architectural constraint, not an instruction to over-generalize M2.
++
++LexMath will validate the public SDK with examples such as:
++
++```text
++7 + 5 = ?       → 12
++15 - 7 = ?      → 8
++6 × 3 = ?       → 18
++24 ÷ 6 = ?      → 4
++? + 5 = 13      → 8
++17 ? 12         → >
++```
++
++The reference mod should load externally and use documented APIs only.
+diff --git a/docs/milestones/M2-LexEngine-Platform-Bringup.md b/docs/milestones/M2-LexEngine-Platform-Bringup.md
+index 2685d7b..21854b3 100644
+--- a/docs/milestones/M2-LexEngine-Platform-Bringup.md
++++ b/docs/milestones/M2-LexEngine-Platform-Bringup.md
+@@ -89,3 +89,7 @@ M2 completes when one native Xbox 360 LexEngine demo:
+ 7. plays one sound.
+ 
+ No Bookworm gameplay reconstruction is required for M2.
++
++## Scope guardrail for future LexMod work
++
++M39/M42 will eventually add the LexMod SDK and the LexMath arithmetic reference mod. M2 should **not** implement those systems early. Its only obligation is to keep the platform/core layer free of game-specific assumptions such as letters, dictionaries or arithmetic rules.
+diff --git a/mnt/data/BWA360_M1_COMPLETE_CLEAN/docs/milestones/M42-LexMod-SDK-LexMath.md b/docs/milestones/M42-LexMod-SDK-LexMath.md
+new file mode 100644
+index 0000000..055fd77
+--- /dev/null
++++ b/docs/milestones/M42-LexMod-SDK-LexMath.md
+@@ -0,0 +1,74 @@
++# M42 — LexMod SDK Showcase: LexMath
++
++**Status: PLANNED / POST-MAINLINE**
++
++## Objective
++
++Validate the public LexMod SDK by shipping a complete educational arithmetic conversion that changes the challenge domain without modifying LexEngine source or relying on private hooks.
++
++M39 establishes the SDK foundation. M42 is the integration proof that the API is expressive enough for a substantially different ruleset.
++
++## Reference gameplay
++
++Instead of forming a word, the player answers an arithmetic challenge by selecting the correct value/operator from presented choices.
++
++```text
++7 + 5 = ?
++
++[ 10 ]  [ 12 ]  [ 14 ]  [ 15 ]
++          ^
++       correct
++```
++
++A correct response produces the normal successful challenge/combat result. Incorrect answers use configurable feedback/penalties appropriate to an educational mode.
++
++## Planned exercise families
++
++- [ ] Addition
++- [ ] Subtraction
++- [ ] Multiplication
++- [ ] Division
++- [ ] Missing-number equations
++- [ ] Comparisons using `<`, `>` and `=`
++- [ ] Difficulty/age profiles
++- [ ] Timed and untimed modes
++- [ ] Configurable distractor generation
++- [ ] Educational feedback and progression
++
++## SDK validation targets
++
++- [ ] External mod manifest
++- [ ] Discover/load/package flow
++- [ ] Public rule-provider API
++- [ ] Custom challenge item/content provider
++- [ ] Custom UI/presentation data where required
++- [ ] Custom scoring/progression configuration
++- [ ] No engine-source modifications required
++- [ ] Host target validation
++- [ ] Xbox 360/Xenia validation
++- [ ] Real-hardware validation
++- [ ] Complete example/template documentation
++
++## Architectural intent
++
++The engine-facing result should be generic enough that downstream systems do not need to distinguish a solved word from a solved calculation:
++
++```text
++WordRuleProvider       ─┐
++                        ├─→ ChallengeResult → combat / progression / VFX
++ArithmeticRuleProvider ─┘
++```
++
++The exact types and API will be determined from reconstructed BWA requirements and the M39 SDK work. This milestone does not justify premature abstraction during M2.
++
++## Definition of Done
++
++M42 completes when LexMath:
++
++1. is implemented primarily as an external LexMod project;
++2. loads through the documented public SDK;
++3. supports representative arithmetic challenge families and difficulty profiles;
++4. drives a complete representative gameplay/combat loop;
++5. runs on supported host targets and Xbox 360;
++6. serves as the canonical mod template/reference implementation;
++7. requires no private or undocumented engine hooks.

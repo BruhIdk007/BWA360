@@ -251,10 +251,11 @@ This file is the canonical high-level roadmap for the project.
   - `bwa-pak`, resource inspector, replay viewer, state diff, symbol DB, function matcher, achievement generator, content validator/packager and RE scripts.
   - **DoD:** clean host setup can reproduce the documented analysis/build pipeline.
 
-- [ ] **M39 — Modding SDK**
-  - Data-driven custom books, enemies, treasures, dictionaries, arenas and scripts.
-  - Safe mod loading and versioned API.
-  - **DoD:** an external sample mod can be built and loaded without changing engine source.
+- [ ] **M39 — LexMod SDK Foundation**
+  - Data-driven custom books, enemies, treasures, dictionaries, arenas, scripts and gameplay rule providers.
+  - Safe mod discovery/loading, manifests, packaging and a versioned public API.
+  - Extension points must allow custom challenge/content logic without requiring engine-source changes.
+  - **DoD:** an external sample mod can be built, packaged and loaded without changing engine source.
 
 - [ ] **M40 — Kinect Research Branch**
   - Optional/post-release only.
@@ -265,6 +266,16 @@ This file is the canonical high-level roadmap for the project.
 - [ ] **M41 — Ultimate Collection Finalization**
   - Cross-module polish, profiling, adaptive quality, frame pacing, benchmark mode/boss, crash diagnostics, documentation and final real-hardware soak testing.
   - **DoD:** production-quality collection release meeting final performance/stability/preservation criteria.
+
+- [ ] **M42 — LexMod SDK Showcase: LexMath**
+  - Build a complete educational arithmetic conversion primarily through the public LexMod SDK, not by hard-coding a special mode into LexEngine.
+  - Replace word-building challenges with number/operator challenges in which the player selects the correct result of an arithmetic expression.
+  - Initial exercise families: addition, subtraction, multiplication, division, missing-number equations and comparisons (`<`, `>`, `=`).
+  - Support age/difficulty profiles, timed and untimed play, configurable distractors, educational feedback and progression.
+  - Reuse the normal combat/progression/presentation pipeline through a generic challenge-result contract so the engine does not need to know whether a correct answer came from a word or a calculation.
+  - Example: `7 + 5 = ?` with `[10] [12] [14] [15]`; selecting `12` produces a successful challenge result.
+  - Ship the mod as the reference/template project for third-party LexMod development.
+  - **DoD:** LexMath builds and loads as an external mod, completes a representative campaign/battle loop on host targets and Xbox 360, and requires no private engine hooks beyond the documented LexMod API.
 
 ---
 
@@ -280,3 +291,4 @@ This file is the canonical high-level roadmap for the project.
 8. **Performance target before spectacle.** A feature that destroys frame pacing does not ship on real Xbox 360.
 9. **Real hardware is authoritative.** Xenia is the rapid iteration environment, not the final performance oracle.
 10. **No proprietary assets in Git.** Users import from their own legally obtained copies.
+11. **Extension boundaries stay content-agnostic.** LexEngine itself should not assume that every challenge is a word; future rule providers may supply letters, numbers, operators or other content while Classic BWA remains word-faithful.

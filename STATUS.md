@@ -36,6 +36,12 @@
 7. Play one simple sound.
 8. Validate on Xenia first, then on real modified Xbox 360 hardware when available.
 
+## Long-term roadmap addition
+
+- [ ] **M39 — LexMod SDK Foundation** will provide the supported external mod API.
+- [ ] **M42 — LexMod SDK Showcase: LexMath** will validate that API with a child-friendly arithmetic conversion.
+- This does **not** expand M2 scope; M2 remains platform bring-up only.
+
 ## Known environment issue
 
 The current Linux Xenia setup detects only Mesa `llvmpipe` rather than a physical Vulkan GPU. This did not block M1 because M1 required no rendering, but hardware Vulkan must be fixed before graphics/performance work becomes authoritative.

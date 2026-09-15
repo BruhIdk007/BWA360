@@ -7,7 +7,7 @@ The project has two strict layers:
 - **Classic Mode** — reconstruct original Bookworm Adventures behavior, balance, data flow and presentation as faithfully as practical.
 - **Enhanced / Collection layers** — optional modern systems built on top of the reconstructed game without silently changing Classic gameplay.
 
-The long-term collection plan includes native LexEngine modules for **Bookworm Adventures Volume 2** and **Bookworm Deluxe**.
+The long-term collection plan includes native LexEngine modules for **Bookworm Adventures Volume 2** and **Bookworm Deluxe**. A later **LexMod SDK** will expose supported extension points for external mods; its reference showcase, **LexMath**, will replace word challenges with child-friendly arithmetic questions while reusing the same engine/combat pipeline.
 
 > **Current state:** M1 — Hello360 is complete. Native PowerPC guest code produced with OpenXeChain has been packaged as XEX2, loaded by Xenia, and has successfully called `xboxkrnl!DbgPrint`.
 
@@ -111,6 +111,26 @@ BWA360/
 ```
 
 Generated `.obj`, `.exe`, `.xex`, `.basefile`, logs, diagnostics and proprietary game data are intentionally ignored.
+
+## Long-term modding direction
+
+The roadmap separates modding into two milestones:
+
+- **M39 — LexMod SDK Foundation:** manifests, packaging, safe loading, versioned APIs and gameplay/content extension points.
+- **M42 — LexMod SDK Showcase: LexMath:** a complete educational arithmetic conversion built through the public SDK.
+
+LexMath is intentionally more than a cosmetic content pack. It is the architecture test that LexEngine can support a different challenge domain without hard-coding a second game into the engine. Classic Bookworm gameplay remains word-based and unchanged.
+
+Conceptually:
+
+```text
+Classic BWA  → Word rule provider       → ChallengeResult
+LexMath      → Arithmetic rule provider → ChallengeResult
+                                           ↓
+                               combat / progression / VFX
+```
+
+The exact API will be designed later; M2 must remain a small platform bring-up and should not prematurely implement the modding layer.
 
 ## Legal / preservation boundary
 

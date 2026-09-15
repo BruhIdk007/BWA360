@@ -89,3 +89,7 @@ M2 completes when one native Xbox 360 LexEngine demo:
 7. plays one sound.
 
 No Bookworm gameplay reconstruction is required for M2.
+
+## Scope guardrail for future LexMod work
+
+M39/M42 will eventually add the LexMod SDK and the LexMath arithmetic reference mod. M2 should **not** implement those systems early. Its only obligation is to keep the platform/core layer free of game-specific assumptions such as letters, dictionaries or arithmetic rules.

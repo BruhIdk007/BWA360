@@ -74,8 +74,14 @@ This file tracks release checkpoints. A release is checked only when its require
 
 - [ ] **v3.0.0 — Ultimate Collection**
   - Requires: M37–M41
-  - Hardened parsers, developer tooling, modding SDK, final optimization/documentation and optional proven Kinect extras.
+  - Hardened parsers, developer tooling, LexMod SDK foundation, final optimization/documentation and optional proven Kinect extras.
   - Tag: `v3.0.0`
+
+- [ ] **v3.1.0 — LexMath SDK Showcase**
+  - Requires: M42 (and the M39 LexMod SDK foundation)
+  - Reference educational arithmetic conversion distributed as the canonical LexMod example/template.
+  - Demonstrates custom gameplay-rule providers without engine-source modification.
+  - Tag: `v3.1.0`
 
 ---
 
