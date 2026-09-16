@@ -23,6 +23,11 @@ docs/milestones/M43-LexAR-360.md
 docs/milestones/M44-LexVR-Research.md
 docs/milestones/M45-Multiplayer-Challenge-Modes.md
 docs/milestones/M46-Lexicon-Pad-Custom-Controller.md
+docs/milestones/M47-Secret-Avatar-Room.md
+docs/milestones/M48-Lexicon-Portal-Smart-Tile-Ecosystem.md
+docs/milestones/M49-Oracle-Trials-Advanced-Gameplay-Rule-Lab.md
+docs/milestones/M50-NeuroLex-BCI-Research.md
+docs/references/COMMUNITY-REFERENCES.md
 docs/repository/FRESH-REPOSITORY-RESET.md
 docs/repository/GITHUB_METADATA.md
 docs/repository/LICENSING.md

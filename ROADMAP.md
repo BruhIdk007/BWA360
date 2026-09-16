@@ -322,6 +322,45 @@ This file is the canonical high-level roadmap for the project.
   - Do not make console-authentication bypasses, stealth services or proprietary redistributed firmware a project dependency.
   - **DoD:** a documented physical Lexicon Pad prototype completes a representative BWA360 word encounter and LexMath challenge on real Xbox 360 hardware (or the closest validated compliant interface path), reports measured input latency/reliability, supports remapping/profiles and leaves standard-controller gameplay fully functional.
 
+
+- [ ] **M47 — Secret Avatar Room**
+  - Add an optional Xbox 360 nostalgia/profile showcase built around the console's Avatar ecosystem where the validated runtime exposes enough profile/avatar functionality.
+  - Research signed-in profile identity, avatar availability and supported render/animation paths; do not hard-code unverified XAM symbol names or assume retail-only services are available to homebrew.
+  - Place the player's Avatar in the diegetic 3D Library Hub as a non-essential resident: sitting on a couch, browsing books, reacting to victories, holding a stock controller or Lexicon Pad, and appearing in local multiplayer lobby scenes.
+  - Keep Avatar presentation behind a capability-gated `LexAvatarService`; when unavailable, fall back to Lex/original collection characters or a generic local profile representation.
+  - Do not copy, redistribute or embed proprietary Microsoft Avatar assets in the repository.
+  - **DoD:** on a validated Xbox 360 environment, the project detects the signed-in local profile and demonstrates either a real supported Avatar render/animation path or a fully documented blocker/fallback path; the normal game remains complete without Avatar support.
+
+- [ ] **M48 — Lexicon Portal & Smart-Tile Ecosystem**
+  - Build an optional tangible-play ecosystem around a physical **Lexicon Portal** plus NFC/RFID-enabled letter tiles, number/operator tiles and collectible figurines.
+  - Reuse the capability-driven input/device layer from M46 rather than creating a second game-specific input stack.
+  - Physical letter tiles can be placed/scanned to construct words; LexMath tiles can represent numbers and operators; figurines can identify characters/loadouts/encounter themes through stable IDs and local metadata.
+  - Treat tags primarily as identifiers. Save/progression data remains authoritative in normal versioned save storage; any data written to tags must be checksummed/versioned and never become the only copy of player progress.
+  - Portal hardware may use a microcontroller/bridge, addressable status lighting and multiple reader zones; the exact Xbox 360 USB/bridge path must be proven on real hardware before the enclosure/PCB is frozen.
+  - Provide host-side tooling for tag provisioning, diagnostics and simulated portal input so software work is testable without custom hardware.
+  - Avoid authentication/protocol bypasses and proprietary redistributed firmware; a compliant/donor/bridge path is acceptable if documented.
+  - **DoD:** a physical prototype identifies at least one figurine, constructs a valid BWA word from tangible letter tiles and completes one LexMath expression using physical number/operator tiles, with deterministic event logs and standard-controller fallback preserved.
+
+- [ ] **M49 — Oracle Trials & Advanced Gameplay Rule Lab**
+  - Collect late experimental **gameplay rules** that deepen word/puzzle strategy without becoming platform, network or hardware requirements.
+  - Add **Word Combo Strings**: optional multi-turn semantic/thematic chains that reward planning across consecutive valid words while keeping Classic scoring untouched.
+  - Add **Dynamic Grid Hazards**: arena-driven tile states such as heat/lava countdowns, ice/frozen regions, currents/bubbles, corruption or timed zones that alter board priorities through deterministic simulation rules.
+  - Add **Anagram Shields** and related boss puzzle barriers: a boss can expose a constrained letter/anagram objective that must be solved or incorporated before normal damage resumes.
+  - Package these mechanics as rule providers/modifiers usable by solo challenge modes and, where deterministic/network-safe, M45 multiplayer sessions.
+  - Provide an **Oracle Trials** menu/gauntlet for combinations of modifiers, endurance variants and curated puzzle encounters; no modifier may silently contaminate Classic Mode.
+  - Prefer data-driven definitions and LexMod-compatible extension points so future community rules can reuse the same contracts.
+  - **DoD:** at least one semantic combo trial, one environmental grid-hazard encounter and one anagram-shield boss encounter run deterministically, replay correctly and can be enabled/disabled independently of Classic Mode.
+
+- [ ] **M50 — NeuroLex / BCI Research**
+  - Experimental/accessibility research into **non-invasive EEG/BCI input** for LexEngine; this is not a claim of general-purpose thought reading.
+  - Investigate practical event-driven paradigms such as P300/SSVEP or other validated classifier outputs for coarse actions: focus/select, confirm, cancel, lane/region choice or assistive scanning.
+  - Keep raw EEG acquisition and classification off the Xbox 360 unless a proven lightweight path exists; the default research architecture is a PC/host BCI bridge that converts signals into high-level `LexInputDevice` events and sends only those events to LexEngine/Xbox 360.
+  - Add calibration, confidence thresholds, dwell/confirmation safeguards, false-positive diagnostics and an immediate conventional-controller fallback.
+  - Design visual stimuli conservatively with configurable frequencies/intensity and a non-BCI mode; do not market or treat the feature as a medical device or diagnostic system.
+  - Explore a **Neuro-Spells** showcase only after reliable coarse control exists: e.g. selecting one of a small number of highlighted tiles/actions or charging a special ability through a classified focus event.
+  - Record latency, accuracy, fatigue/usability observations and reproducibility; BCI support must remain optional and must never block normal gameplay.
+  - **DoD:** a supported host EEG pipeline produces repeatable high-level LexInput events in a controlled demo, completes one small BWA/LexMath interaction with measured classifier performance, and documents limits/failure cases honestly.
+
 ---
 
 # Global Engineering Principles

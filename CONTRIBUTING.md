@@ -12,6 +12,7 @@ BWA360 is currently in early bring-up and reverse-engineering stages. Contributi
 6. Persistent formats must be versioned and endian-safe.
 7. Target-specific code belongs behind platform interfaces rather than leaking through reconstructed game logic.
 8. Real-hardware verification should be recorded separately from Xenia verification.
+9. Community references such as the Bookworm Adventures Wikia/Fandom may guide discovery and inspiration, but reconstruction-critical claims must be independently verified; link/attribute rather than copying external text, screenshots or artwork into the repository.
 
 ## Before opening the repository to outside contributors
 

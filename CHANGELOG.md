@@ -1,5 +1,6 @@
 # Changelog
 
+- Added the Bookworm Adventures Wikia/Fandom as a linked community research/inspiration resource, with explicit verification and attribution boundaries.
 All notable project-level milestones are recorded here.
 
 ## [Unreleased]
@@ -19,6 +20,11 @@ All notable project-level milestones are recorded here.
 - Added **M46 — Lexicon Pad Custom Controller**, a wired-first purpose-built BWA360/LexEngine controller with mechanical alphabet entry, LexMath number/operator controls, dedicated gameplay actions, optional analog rewind control, firmware profiles and haptic/status feedback.
 - Defined M46 around a capability-driven `LexInputDevice` boundary so stock Xbox controllers, host input, Kinect and mixed-device M45 multiplayer remain supported.
 - Required real-hardware validation of the Xbox 360 device/interface path without making platform-enforcement bypasses or redistributed proprietary firmware project dependencies.
+- Added **M47 — Secret Avatar Room**, a capability-gated Xbox 360 Avatar/profile showcase for the 3D Library Hub and local multiplayer presentation, with mandatory non-Avatar fallbacks.
+- Added **M48 — Lexicon Portal & Smart-Tile Ecosystem**, covering NFC/RFID letter/number/operator tiles, collectible figurines, a physical portal/bridge and host provisioning/diagnostic tooling.
+- Added **M49 — Oracle Trials & Advanced Gameplay Rule Lab**, separating pure gameplay-rule experiments (semantic combo strings, environmental grid hazards and anagram shields) from M45 networking/session work.
+- Added **M50 — NeuroLex / BCI Research**, a non-invasive EEG research/accessibility layer that converts validated classifier output into coarse LexInput events through a host bridge.
+- Declared M50 the final planned milestone and kept M47–M50 optional/capability-gated so none expand M2 or weaken Classic-mode fidelity.
 
 ## [0.0.1] — Toolchain Bring-up — 2026-09-15
 

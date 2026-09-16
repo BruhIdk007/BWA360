@@ -171,3 +171,98 @@ No word-combat rule should depend on a Lexicon Pad being present. Direct alphabe
 Xbox 360 electrical/protocol/authentication details are deliberately isolated beneath the platform-device backend and must be proven on real hardware before PCB decisions are frozen. The project may use a compliant/donor interface where appropriate; console-enforcement bypasses and redistributed proprietary firmware are outside the engine architecture.
 
 M45 mixed-device multiplayer should be able to assign different `LexInputDevice` implementations per local player, allowing configurations such as Lexicon Pad + stock Xbox controller without special-case gameplay code.
+
+## Future profile/avatar presentation boundary (M47)
+
+Avatar/profile integration is a presentation/profile service, never a gameplay dependency:
+
+```text
+signed-in profile
+      |
+      v
+LexProfileService
+      |
+      +-- local identity/settings
+      +-- Avatar capability query
+      |
+      v
+LexAvatarService (optional)
+      |
+      +-- system-supported Avatar path
+      +-- fallback character/profile representation
+      |
+      v
+3D Hub / lobby / reactions
+```
+
+Exact Xbox 360 system APIs must be discovered and validated before use; architectural documentation must not freeze unverified XAM function names. Proprietary Avatar content is not copied into the project.
+
+## Future tangible-device boundary (M48)
+
+The Lexicon Portal is another device provider behind normalized events:
+
+```text
+NFC/RFID tiles + figurines
+          |
+     portal MCU/bridge
+          |
+          v
+LexPhysicalDeviceBackend
+          |
+          +-- tile placed/removed
+          +-- figurine identified
+          +-- portal zone/status
+          |
+          v
+LexInputDevice / content-ID events
+          |
+          v
+challenge / UI / collection systems
+```
+
+Tags are primarily stable identifiers. Authoritative progression stays in normal versioned saves so loss/damage/cloning of a physical tag cannot destroy or silently fork the only copy of progress.
+
+## Future advanced-rule boundary (M49)
+
+M49 extends deterministic game rules, not platform code:
+
+```text
+RuleProvider / RuleModifier
+      |
+      +-- semantic combo chain
+      +-- environmental grid hazard
+      +-- anagram/boss shield objective
+      |
+      v
+Deterministic simulation events
+      |
+      v
+presentation / replay / multiplayer
+```
+
+Every advanced rule must be independently enabled, serialized, replayable and excluded from Classic Mode unless explicitly selected.
+
+## Future BCI boundary (M50)
+
+Raw EEG acquisition and classification are treated as external/host concerns by default:
+
+```text
+EEG headset
+    |
+acquisition + calibration + classifier
+    |           (host/PC preferred)
+    v
+high-level intent events
+    |
+bridge transport
+    |
+    v
+LexBCIInputBackend
+    |
+    v
+LexInputDevice
+    |
+Game / UI / accessibility
+```
+
+LexEngine consumes only coarse actions and confidence/timing metadata. It does not diagnose health conditions, does not claim general thought decoding, and must always preserve a conventional input fallback.

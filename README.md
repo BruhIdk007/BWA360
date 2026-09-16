@@ -7,7 +7,7 @@ The project has two strict layers:
 - **Classic Mode** — reconstruct original Bookworm Adventures behavior, balance, data flow and presentation as faithfully as practical.
 - **Enhanced / Collection layers** — optional modern systems built on top of the reconstructed game without silently changing Classic gameplay.
 
-The long-term collection plan includes native LexEngine modules for **Bookworm Adventures Volume 2** and **Bookworm Deluxe**. A later **LexMod SDK** will expose supported extension points for external mods; its reference showcase, **LexMath**, will replace word challenges with child-friendly arithmetic questions while reusing the same engine/combat pipeline. Post-mainline research targets also include **LexAR 360** (Xbox 360 + Kinect augmented-reality presentation), **LexVR Research** (portable VR plus Xbox 360 stereo/head-tracking experiments), **M45 Multiplayer & Challenge Modes**, and **M46 Lexicon Pad**, a purpose-built physical controller for BWA360/LexEngine.
+The long-term collection plan includes native LexEngine modules for **Bookworm Adventures Volume 2** and **Bookworm Deluxe**. A later **LexMod SDK** will expose supported extension points for external mods; its reference showcase, **LexMath**, will replace word challenges with child-friendly arithmetic questions while reusing the same engine/combat pipeline. Post-mainline research targets also include **LexAR 360** (Xbox 360 + Kinect augmented-reality presentation), **LexVR Research** (portable VR plus Xbox 360 stereo/head-tracking experiments), **M45 Multiplayer & Challenge Modes**, **M46 Lexicon Pad**, **M47 Secret Avatar Room**, **M48 Lexicon Portal & Smart-Tile Ecosystem**, **M49 Oracle Trials & Advanced Gameplay Rule Lab**, and **M50 NeuroLex / BCI Research**.
 
 > **Current state:** M1 — Hello360 is complete. Native PowerPC guest code produced with OpenXeChain has been packaged as XEX2, loaded by Xenia, and has successfully called `xboxkrnl!DbgPrint`.
 
@@ -101,6 +101,7 @@ BWA360/
 │   ├── evidence/
 │   ├── milestones/
 │   ├── repository/
+│   ├── references/
 │   └── toolchain/
 ├── patches/
 │   └── synthxex/
@@ -164,6 +165,26 @@ The initial design direction combines:
 - firmware-side remapping/profiles and a capability-based `LexInputDevice` integration.
 
 Lexicon Pad is **optional hardware**, not a compatibility requirement. Standard Xbox 360 controllers, host keyboard/gamepad input and other supported devices must remain first-class paths. Xbox 360 device/authentication details must be validated on real hardware; M46 may use a compliant/donor interface or another documented legal hardware path rather than making protocol-enforcement bypasses part of LexEngine.
+
+
+## Final post-mainline ecosystem milestones
+
+The roadmap closes at **M50** with four capability-gated projects that deliberately remain optional:
+
+- **M47 — Secret Avatar Room:** research the Xbox 360 Avatar/profile ecosystem and, where supported by the validated runtime, place the signed-in player's Avatar inside the 3D Library Hub and multiplayer lobby scenes. A fallback character path is mandatory.
+- **M48 — Lexicon Portal & Smart-Tile Ecosystem:** tangible NFC/RFID letter/number/operator tiles and figurines, connected through a documented bridge/device layer. Tags identify content; normal save storage remains authoritative.
+- **M49 — Oracle Trials & Advanced Gameplay Rule Lab:** semantic word-combo strings, deterministic environmental grid hazards, anagram shields and curated advanced challenge-rule combinations. These are optional rulesets, not Classic changes.
+- **M50 — NeuroLex / BCI Research:** non-invasive EEG/BCI experiments that translate classifier output into coarse `LexInputDevice` actions, preferably through a host bridge. It is an accessibility/research input path, not a "mind-reading" requirement.
+
+These milestones complete the conceptual roadmap without expanding M2. They all reuse boundaries established earlier: presentation services, profile/capability services, `LexInputDevice`, deterministic challenge/rule providers and host/platform bridges.
+
+## Community research and inspiration
+
+For creature/enemy inspiration, terminology and general Bookworm Adventures research, the project will also consult the community-maintained **Bookworm Adventures Wikia / Fandom**:
+
+https://bookwormadvs.fandom.com/wiki/Bookworm_Adventures_Wikia
+
+It is worth visiting directly as a community knowledge base, and BWA360 should link back to it rather than mirror its material. The wiki is a discovery/inspiration source, not executable-level authority: Classic reconstruction claims are still verified against original game behavior, binaries/data, traces and reproducible tests. See [`docs/references/COMMUNITY-REFERENCES.md`](docs/references/COMMUNITY-REFERENCES.md).
 
 ## Legal / preservation boundary
 

@@ -105,6 +105,27 @@ This file tracks release checkpoints. A release is checked only when its require
   - Standard Xbox controller support remains mandatory.
   - Tag: `v3.5.0`
 
+
+- [ ] **v3.6.0 — Secret Avatar Room Showcase**
+  - Requires: M47 and mature profile/presentation capability abstractions.
+  - Demonstrates the validated Xbox 360 Avatar/profile integration path where available, plus the required fallback presentation path.
+  - Tag: `v3.6.0`
+
+- [ ] **v3.7.0 — Lexicon Portal Tangible Showcase**
+  - Requires: M48 and the M46 input/device foundation.
+  - Demonstrates figurine identification, physical word construction and LexMath number/operator tiles through a documented portal/bridge prototype.
+  - Tag: `v3.7.0`
+
+- [ ] **v3.8.0 — Oracle Trials Gameplay Showcase**
+  - Requires: M49 and stable deterministic rule-provider/replay foundations.
+  - Demonstrates semantic word combos, environmental grid hazards and anagram-shield boss rules without altering Classic Mode.
+  - Tag: `v3.8.0`
+
+- [ ] **v3.9.0 — NeuroLex Research Showcase**
+  - Requires: M50.
+  - Documents and demonstrates a non-invasive EEG classifier bridge producing coarse LexInput events, including measured latency/accuracy and conventional-input fallback.
+  - Tag: `v3.9.0`
+
 ---
 
 ## Planning range

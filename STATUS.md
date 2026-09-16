@@ -44,6 +44,10 @@
 - [ ] **M44 — LexVR Research** will add portable VR research plus Xbox 360 stereo/head-tracking/bridge experiments.
 - [ ] **M45 — Multiplayer & Challenge Modes** will add local/network Co-op + Versus, party modes, LexMath multiplayer and reusable solo counterparts through a transport-independent session layer, with optional Xbox Live/Xbox Network session research as a stretch backend.
 - [ ] **M46 — Lexicon Pad Custom Controller** will build an optional dedicated physical controller for BWA360/LexEngine with direct letter input, a LexMath layer and mixed-device multiplayer support.
+- [ ] **M47 — Secret Avatar Room** will research capability-gated Xbox 360 Avatar/profile integration for the 3D hub and multiplayer lobby scenes.
+- [ ] **M48 — Lexicon Portal & Smart-Tile Ecosystem** will add optional NFC/RFID tiles, figurines and a physical portal through the shared device/input layer.
+- [ ] **M49 — Oracle Trials & Advanced Gameplay Rule Lab** will add optional semantic combos, deterministic grid hazards, anagram shields and curated advanced rule trials.
+- [ ] **M50 — NeuroLex / BCI Research** will investigate non-invasive EEG classifier input through a host bridge as an optional accessibility/research path.
 - These do **not** expand M2 scope; M2 remains platform bring-up only.
 
 ## Known environment issue
