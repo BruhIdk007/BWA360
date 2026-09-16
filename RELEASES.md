@@ -93,6 +93,18 @@ This file tracks release checkpoints. A release is checked only when its require
   - Portable VR battle/interaction showcase plus documented Xbox 360 stereo/head-tracking/bridge research results.
   - Tag: `v3.3.0`
 
+- [ ] **v3.4.0 — Multiplayer & Challenge Showcase**
+  - Requires: M45 and relevant deterministic/session foundations from earlier milestones.
+  - Local Co-op + Versus, at least one party/solo challenge mode, and one validated networked match through a supported transport with desync diagnostics.
+  - Includes a LexMath multiplayer demonstration, documented Xbox 360 LAN/System Link/LiNK compatibility results where practical, and an Xbox Live/Xbox Network session-API research report (with a proof of concept only if technically and legitimately available).
+  - Tag: `v3.4.0`
+
+- [ ] **v3.5.0 — Lexicon Pad Hardware Showcase**
+  - Requires: M46 and stable LexInput/device capability abstractions from the mature engine.
+  - Documents and demonstrates the purpose-built Lexicon Pad controller on real hardware, including direct letter input, LexMath controls, remapping/profiles, haptics/status feedback and measured input behavior.
+  - Standard Xbox controller support remains mandatory.
+  - Tag: `v3.5.0`
+
 ---
 
 ## Planning range

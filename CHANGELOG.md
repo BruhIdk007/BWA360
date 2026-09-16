@@ -12,6 +12,13 @@ All notable project-level milestones are recorded here.
 - Added **M43 — LexAR 360**, an Xbox 360 + Kinect augmented-reality research/showcase target built as a presentation/input backend.
 - Added **M44 — LexVR Research**, covering portable VR plus Xbox 360 stereoscopic/head-tracking and optional bridge research without making HMD support a core console requirement.
 - Clarified that future AR/VR work must preserve simulation/presentation separation and must not expand M2 scope.
+- Added **M45 — Multiplayer & Challenge Modes**, covering local/network Co-op and Versus, Boss Raid, Hot Potato, LexMath multiplayer, optional Kinect asymmetric play and reusable solo challenge variants.
+- Defined Xbox networking priority as local + LAN/System Link first, with Aurora LiNK compatibility research where applicable and an optional Xbox Live/Xbox Network session backend as a separate research tier.
+- Kept Xbox Live research transport-independent and non-mandatory: no multiplayer feature may require stealth/anti-ban services or platform-enforcement bypasses.
+- Clarified that M21 rewind/snapshots are useful rollback primitives but full rollback requires separate fixed-tick, prediction, resimulation, checksum and side-effect-reconciliation work.
+- Added **M46 — Lexicon Pad Custom Controller**, a wired-first purpose-built BWA360/LexEngine controller with mechanical alphabet entry, LexMath number/operator controls, dedicated gameplay actions, optional analog rewind control, firmware profiles and haptic/status feedback.
+- Defined M46 around a capability-driven `LexInputDevice` boundary so stock Xbox controllers, host input, Kinect and mixed-device M45 multiplayer remain supported.
+- Required real-hardware validation of the Xbox 360 device/interface path without making platform-enforcement bypasses or redistributed proprietary firmware project dependencies.
 
 ## [0.0.1] — Toolchain Bring-up — 2026-09-15
 

@@ -42,6 +42,8 @@
 - [ ] **M42 — LexMod SDK Showcase: LexMath** will validate that API with a child-friendly arithmetic conversion.
 - [ ] **M43 — LexAR 360** will research an Xbox 360 + Kinect AR presentation/input backend.
 - [ ] **M44 — LexVR Research** will add portable VR research plus Xbox 360 stereo/head-tracking/bridge experiments.
+- [ ] **M45 — Multiplayer & Challenge Modes** will add local/network Co-op + Versus, party modes, LexMath multiplayer and reusable solo counterparts through a transport-independent session layer, with optional Xbox Live/Xbox Network session research as a stretch backend.
+- [ ] **M46 — Lexicon Pad Custom Controller** will build an optional dedicated physical controller for BWA360/LexEngine with direct letter input, a LexMath layer and mixed-device multiplayer support.
 - These do **not** expand M2 scope; M2 remains platform bring-up only.
 
 ## Known environment issue

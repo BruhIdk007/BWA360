@@ -7,7 +7,7 @@ The project has two strict layers:
 - **Classic Mode** — reconstruct original Bookworm Adventures behavior, balance, data flow and presentation as faithfully as practical.
 - **Enhanced / Collection layers** — optional modern systems built on top of the reconstructed game without silently changing Classic gameplay.
 
-The long-term collection plan includes native LexEngine modules for **Bookworm Adventures Volume 2** and **Bookworm Deluxe**. A later **LexMod SDK** will expose supported extension points for external mods; its reference showcase, **LexMath**, will replace word challenges with child-friendly arithmetic questions while reusing the same engine/combat pipeline. Post-mainline research targets also include **LexAR 360** (Xbox 360 + Kinect augmented-reality presentation) and **LexVR Research** (portable VR plus Xbox 360 stereo/head-tracking experiments).
+The long-term collection plan includes native LexEngine modules for **Bookworm Adventures Volume 2** and **Bookworm Deluxe**. A later **LexMod SDK** will expose supported extension points for external mods; its reference showcase, **LexMath**, will replace word challenges with child-friendly arithmetic questions while reusing the same engine/combat pipeline. Post-mainline research targets also include **LexAR 360** (Xbox 360 + Kinect augmented-reality presentation), **LexVR Research** (portable VR plus Xbox 360 stereo/head-tracking experiments), **M45 Multiplayer & Challenge Modes**, and **M46 Lexicon Pad**, a purpose-built physical controller for BWA360/LexEngine.
 
 > **Current state:** M1 — Hello360 is complete. Native PowerPC guest code produced with OpenXeChain has been packaged as XEX2, loaded by Xenia, and has successfully called `xboxkrnl!DbgPrint`.
 
@@ -140,6 +140,30 @@ Two post-mainline milestones extend the same simulation/presentation separation:
 - **M44 — LexVR Research:** a portable VR backend for suitable host hardware plus Xbox 360 research into stereo rendering, Kinect-derived head/pose tracking and optional PC/HMD bridge experiments.
 
 Neither milestone expands M2 scope. M2 should only establish clean platform, input, timing and presentation boundaries that do not prevent future AR/VR backends.
+
+## Long-term multiplayer and challenge direction
+
+**M45 — Multiplayer & Challenge Modes** adds a reusable session/game-mode layer for both **Co-op and Versus**, first locally and then through supported network transports. Planned families include Word Duel, shared/parallel-board Co-op, Boss Raid, Hot Potato, LexMath Duel and optional Kinect asymmetric play. Selected rules also gain solo counterparts such as Time Bomb, Boss Raid Solo and Ghost Challenge.
+
+The network architecture is transport-independent. Xbox 360 work prioritizes local play and LAN/System Link-style connectivity, with Aurora LiNK compatibility investigated where applicable. A separate **Xbox Live / Xbox Network research backend** may investigate native session creation, discovery/matchmaking, host/join, invites and presence where those facilities are legitimately and technically available to the tested environment. It is a stretch/research transport, not a requirement for M45 completion. Stealth/anti-ban services and platform-enforcement bypasses are not engine dependencies.
+
+Earlier deterministic replay/snapshot work can support networking, but the project explicitly does **not** equate rewind with finished rollback netcode: rollback requires fixed ticks, input history/prediction, resimulation, state hashes and careful presentation reconciliation.
+
+## Long-term custom controller direction
+
+**M46 — Lexicon Pad Custom Controller** is a dedicated hardware project for BWA360/LexEngine after the software ecosystem is mature. The goal is a wired-first Xbox 360 controller optimized for word construction, LexMath and the project's later challenge/multiplayer systems.
+
+The initial design direction combines:
+
+- a compact mechanical alphabet key matrix for direct letter entry;
+- a numeric/operator layer for LexMath;
+- standard navigation/game controls so menus and encounters remain practical;
+- dedicated `Submit`, `Undo`, `Clear`, `Shuffle` and configurable action keys;
+- rumble/status feedback;
+- an optional analog control intended for future rewind/time-manipulation mechanics;
+- firmware-side remapping/profiles and a capability-based `LexInputDevice` integration.
+
+Lexicon Pad is **optional hardware**, not a compatibility requirement. Standard Xbox 360 controllers, host keyboard/gamepad input and other supported devices must remain first-class paths. Xbox 360 device/authentication details must be validated on real hardware; M46 may use a compliant/donor interface or another documented legal hardware path rather than making protocol-enforcement bypasses part of LexEngine.
 
 ## Legal / preservation boundary
 

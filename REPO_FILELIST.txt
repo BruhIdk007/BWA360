@@ -21,6 +21,8 @@ docs/milestones/M2-LexEngine-Platform-Bringup.md
 docs/milestones/M42-LexMod-SDK-LexMath.md
 docs/milestones/M43-LexAR-360.md
 docs/milestones/M44-LexVR-Research.md
+docs/milestones/M45-Multiplayer-Challenge-Modes.md
+docs/milestones/M46-Lexicon-Pad-Custom-Controller.md
 docs/repository/FRESH-REPOSITORY-RESET.md
 docs/repository/GITHUB_METADATA.md
 docs/repository/LICENSING.md

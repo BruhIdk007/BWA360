@@ -297,6 +297,31 @@ This file is the canonical high-level roadmap for the project.
   - VR remains a frontend/backend layer; no core simulation code may depend on HMD APIs.
   - **DoD:** the portable LexVR backend completes a representative battle on a VR-capable target, while Xbox 360-specific stereo/head-tracking research is either demonstrated or documented with reproducible limitations.
 
+- [ ] **M45 — Multiplayer & Challenge Modes**
+  - Add reusable local and network session/game-mode infrastructure supporting **Co-op and Versus** without duplicating the core simulation.
+  - Local targets: Word Duel, shared-board/parallel-board Co-op, small-team play and party modes such as Hot Potato.
+  - Network targets: LAN/System Link-style transport first, Aurora LiNK compatibility research where applicable, plus portable replaceable direct/relay transports for host builds.
+  - Add an optional **Xbox Live / Xbox Network research backend** for native-style session create/find/join/leave, matchmaking/discovery, invites and presence where those facilities are legitimately and technically available; failure/limitations must be documented rather than bypassed.
+  - Xbox Live is a stretch transport, not a dependency: local/System Link/community transports must preserve multiplayer even when official services are unavailable.
+  - Reuse deterministic simulation/snapshots from earlier milestones, but treat rollback as a separate engineering feature requiring fixed ticks, input history/prediction, resimulation, checksums and presentation-side-effect reconciliation.
+  - Add LexMath Duel/Co-op and optional Kinect asymmetric play through existing challenge/input abstractions.
+  - Reuse selected rules as solo challenges: Boss Raid Solo, Time Bomb, Puzzle/LexMath Academy, Kinect Trial and deterministic Ghost Challenge.
+  - Do not make stealth/anti-ban services or platform-enforcement bypasses a project dependency.
+  - **DoD:** local Versus + Co-op + one party/solo mode ship through reusable session APIs; at least one supported network transport completes a real match with desync diagnostics; Xbox-specific LAN/System Link/LiNK results are documented and tested on real hardware where practical; Xbox Live/Xbox Network API research is documented and demonstrated only if the validated environment permits it without enforcement bypasses.
+
+- [ ] **M46 — Lexicon Pad Custom Controller**
+  - Design and build a purpose-built physical controller for BWA360/LexEngine, with Xbox 360 as the primary hardware target.
+  - Wired-first architecture; validate the real console device/authentication path before committing the final PCB/interface design.
+  - Provide a compact mechanical alphabet matrix for direct word entry plus a numeric/operator layer for LexMath.
+  - Include practical game controls and dedicated actions such as Submit, Undo/Backspace, Clear, Shuffle and configurable power/hint shortcuts.
+  - Research an analog slider/wheel for M21-style rewind/time control, plus rumble and status lighting where useful.
+  - Add firmware profiles/remapping, deterministic debouncing/key scanning, latency diagnostics and a host-side input test utility.
+  - Integrate through a capability-driven `LexInputDevice` abstraction so standard Xbox controllers, keyboard/gamepad host input, Kinect and future devices remain supported.
+  - Multiplayer must allow mixed devices (for example Lexicon Pad + standard Xbox controller) without ruleset-specific hacks.
+  - Prototype progression: electrical proof-of-concept → Rev A hand-wired/dev-board unit → Rev B custom PCB/enclosure → validated final revision.
+  - Do not make console-authentication bypasses, stealth services or proprietary redistributed firmware a project dependency.
+  - **DoD:** a documented physical Lexicon Pad prototype completes a representative BWA360 word encounter and LexMath challenge on real Xbox 360 hardware (or the closest validated compliant interface path), reports measured input latency/reliability, supports remapping/profiles and leaves standard-controller gameplay fully functional.
+
 ---
 
 # Global Engineering Principles
