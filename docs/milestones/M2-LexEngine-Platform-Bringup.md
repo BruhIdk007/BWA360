@@ -92,4 +92,4 @@ No Bookworm gameplay reconstruction is required for M2.
 
 ## Scope guardrail for future LexMod work
 
-M39/M42 will eventually add the LexMod SDK and the LexMath arithmetic reference mod. M2 should **not** implement those systems early. Its only obligation is to keep the platform/core layer free of game-specific assumptions such as letters, dictionaries or arithmetic rules.
+M39/M42 will eventually add the LexMod SDK and the LexMath arithmetic reference mod. M43/M44 later add experimental AR/VR presentation backends. M2 should **not** implement any of those systems early. Its only obligation is to keep the platform/core layer free of game-specific assumptions such as letters, dictionaries or arithmetic rules, and to keep input/render/platform boundaries clean enough that future Kinect, camera, stereo or HMD backends do not require simulation rewrites.

@@ -19,6 +19,8 @@ docs/evidence/M1-validation.txt
 docs/milestones/M1-Hello360.md
 docs/milestones/M2-LexEngine-Platform-Bringup.md
 docs/milestones/M42-LexMod-SDK-LexMath.md
+docs/milestones/M43-LexAR-360.md
+docs/milestones/M44-LexVR-Research.md
 docs/repository/FRESH-REPOSITORY-RESET.md
 docs/repository/GITHUB_METADATA.md
 docs/repository/LICENSING.md

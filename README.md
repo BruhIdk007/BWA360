@@ -7,7 +7,7 @@ The project has two strict layers:
 - **Classic Mode** — reconstruct original Bookworm Adventures behavior, balance, data flow and presentation as faithfully as practical.
 - **Enhanced / Collection layers** — optional modern systems built on top of the reconstructed game without silently changing Classic gameplay.
 
-The long-term collection plan includes native LexEngine modules for **Bookworm Adventures Volume 2** and **Bookworm Deluxe**. A later **LexMod SDK** will expose supported extension points for external mods; its reference showcase, **LexMath**, will replace word challenges with child-friendly arithmetic questions while reusing the same engine/combat pipeline.
+The long-term collection plan includes native LexEngine modules for **Bookworm Adventures Volume 2** and **Bookworm Deluxe**. A later **LexMod SDK** will expose supported extension points for external mods; its reference showcase, **LexMath**, will replace word challenges with child-friendly arithmetic questions while reusing the same engine/combat pipeline. Post-mainline research targets also include **LexAR 360** (Xbox 360 + Kinect augmented-reality presentation) and **LexVR Research** (portable VR plus Xbox 360 stereo/head-tracking experiments).
 
 > **Current state:** M1 — Hello360 is complete. Native PowerPC guest code produced with OpenXeChain has been packaged as XEX2, loaded by Xenia, and has successfully called `xboxkrnl!DbgPrint`.
 
@@ -131,6 +131,15 @@ LexMath      → Arithmetic rule provider → ChallengeResult
 ```
 
 The exact API will be designed later; M2 must remain a small platform bring-up and should not prematurely implement the modding layer.
+
+## Long-term AR/VR research direction
+
+Two post-mainline milestones extend the same simulation/presentation separation:
+
+- **M43 — LexAR 360:** Xbox 360 + Kinect is the primary experimental target. Camera/depth/pose input feeds an AR presentation backend while gameplay simulation remains unchanged.
+- **M44 — LexVR Research:** a portable VR backend for suitable host hardware plus Xbox 360 research into stereo rendering, Kinect-derived head/pose tracking and optional PC/HMD bridge experiments.
+
+Neither milestone expands M2 scope. M2 should only establish clean platform, input, timing and presentation boundaries that do not prevent future AR/VR backends.
 
 ## Legal / preservation boundary
 

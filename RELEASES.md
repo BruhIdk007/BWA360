@@ -83,6 +83,16 @@ This file tracks release checkpoints. A release is checked only when its require
   - Demonstrates custom gameplay-rule providers without engine-source modification.
   - Tag: `v3.1.0`
 
+- [ ] **v3.2.0 — LexAR 360 Research Showcase**
+  - Requires: M43 and relevant successful M40 Kinect research.
+  - Xbox 360 + Kinect AR presentation showcase with at least one complete encounter and LexMath AR demonstration where real-hardware access proves practical.
+  - Tag: `v3.2.0`
+
+- [ ] **v3.3.0 — LexVR Research Showcase**
+  - Requires: M44.
+  - Portable VR battle/interaction showcase plus documented Xbox 360 stereo/head-tracking/bridge research results.
+  - Tag: `v3.3.0`
+
 ---
 
 ## Planning range

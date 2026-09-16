@@ -86,3 +86,25 @@ LexMath will validate the public SDK with examples such as:
 ```
 
 The reference mod should load externally and use documented APIs only.
+
+## Future XR presentation boundary (M43/M44)
+
+AR and VR are late experimental presentation/input targets, not simulation features. The long-term dependency direction is:
+
+```text
+LexEngine simulation / combat / progression / challenge rules
+                         |
+                         v
+                 presentation API
+        +----------------+----------------+
+        |                |                |
+      2D/3D          LexAR 360          LexVR
+                         |                |
+                  Kinect/camera      stereo/HMD/pose
+```
+
+**M43 — LexAR 360** uses Xbox 360 + Kinect as its primary research target where homebrew access is practical. Camera, depth, skeleton/gesture data and compositing must stay behind platform/input/presentation APIs.
+
+**M44 — LexVR Research** must not make modern HMD APIs an Xbox 360 dependency. Xbox-specific work begins with stereo/head-tracking research; modern HMD integration belongs in a portable host backend or an explicitly experimental bridge.
+
+M2 must not implement XR. It only needs boundaries clean enough that future input/camera/render backends can be introduced without moving platform-specific code into gameplay simulation.

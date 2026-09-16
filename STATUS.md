@@ -40,7 +40,9 @@
 
 - [ ] **M39 — LexMod SDK Foundation** will provide the supported external mod API.
 - [ ] **M42 — LexMod SDK Showcase: LexMath** will validate that API with a child-friendly arithmetic conversion.
-- This does **not** expand M2 scope; M2 remains platform bring-up only.
+- [ ] **M43 — LexAR 360** will research an Xbox 360 + Kinect AR presentation/input backend.
+- [ ] **M44 — LexVR Research** will add portable VR research plus Xbox 360 stereo/head-tracking/bridge experiments.
+- These do **not** expand M2 scope; M2 remains platform bring-up only.
 
 ## Known environment issue
 

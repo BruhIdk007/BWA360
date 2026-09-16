@@ -9,6 +9,9 @@ All notable project-level milestones are recorded here.
 - Renamed M39 to **LexMod SDK Foundation** and clarified support for public gameplay/content extension points.
 - Added **M42 — LexMod SDK Showcase: LexMath**, an educational arithmetic conversion used as the final integration test and reference project for the public modding API.
 - Added a long-term architecture requirement that engine extension boundaries remain content-agnostic while Classic BWA remains strictly word-faithful.
+- Added **M43 — LexAR 360**, an Xbox 360 + Kinect augmented-reality research/showcase target built as a presentation/input backend.
+- Added **M44 — LexVR Research**, covering portable VR plus Xbox 360 stereoscopic/head-tracking and optional bridge research without making HMD support a core console requirement.
+- Clarified that future AR/VR work must preserve simulation/presentation separation and must not expand M2 scope.
 
 ## [0.0.1] — Toolchain Bring-up — 2026-09-15
 

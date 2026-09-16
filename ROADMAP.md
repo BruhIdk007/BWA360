@@ -277,6 +277,26 @@ This file is the canonical high-level roadmap for the project.
   - Ship the mod as the reference/template project for third-party LexMod development.
   - **DoD:** LexMath builds and loads as an external mod, completes a representative campaign/battle loop on host targets and Xbox 360, and requires no private engine hooks beyond the documented LexMod API.
 
+- [ ] **M43 — LexAR 360**
+  - Experimental/post-mainline augmented-reality presentation with **Xbox 360 + Kinect as the primary target**.
+  - Capture the player/environment camera feed and composite LexEngine content over it on the TV.
+  - Research Kinect RGB/depth/skeleton access through the homebrew toolchain and isolate it behind a platform/input abstraction.
+  - Support spatially presented tiles, enemies, effects and world-space UI without moving gameplay rules into the AR backend.
+  - Provide gesture/hand-selection experiments where technically reliable; controller fallback remains valid.
+  - Build at least one complete AR battle and a LexMath AR demonstration.
+  - AR must be a presentation/input backend: simulation, combat, progression and challenge validation remain presentation-independent.
+  - **DoD:** a complete representative encounter runs in an Xbox 360/Kinect AR presentation on real hardware if practical; otherwise the exact hardware/toolchain blocker is documented and the portable AR backend is demonstrated on a supported host target.
+
+- [ ] **M44 — LexVR Research**
+  - Experimental/post-mainline VR research; **do not make modern HMD support a core Xbox 360 requirement**.
+  - First Xbox 360 research tier: stereoscopic rendering, head-tracked camera experiments and Kinect-derived pose input where feasible.
+  - Investigate a bridge architecture in which a PC/OpenXR-class host handles modern headset I/O while LexEngine/Xbox 360 can remain responsible for simulation and selected rendering experiments.
+  - Add a portable VR presentation/input backend with stereo views, head pose abstraction, world-space UI and spatial tile interaction.
+  - Include comfort requirements: stable horizon/UI anchors, minimal forced acceleration, configurable interaction distance, seated mode and standing mode.
+  - Build one complete VR battle and a LexMath VR demonstration on an appropriate VR-capable target.
+  - VR remains a frontend/backend layer; no core simulation code may depend on HMD APIs.
+  - **DoD:** the portable LexVR backend completes a representative battle on a VR-capable target, while Xbox 360-specific stereo/head-tracking research is either demonstrated or documented with reproducible limitations.
+
 ---
 
 # Global Engineering Principles
