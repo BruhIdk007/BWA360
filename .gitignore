@@ -14,6 +14,7 @@ obj/
 *.xex
 *.basefile
 *.pdb
+*.patch
 
 # M1 generated diagnostics
 **/diagnostics/
